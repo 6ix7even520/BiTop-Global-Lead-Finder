@@ -1,0 +1,15 @@
+BiTop Global Lead Finder V1.2.1
+
+Security and SIWC compliance patch:
+- Require loopback Host validation and same-origin POST requests to reduce local CSRF / DNS-rebinding exposure.
+- Enforce explicit privacy consent on Serper search and AI research endpoints.
+- Add an in-app privacy notice and require it in the public source repository.
+- Determine ChatGPT plan-use permission only from token-response granted scopes; do not infer it from callback query parameters.
+- Remove account-add / account-switch UI to avoid encouraging account rotation or usage splitting.
+- Escape identity and error text in OAuth callback HTML.
+- Retain V1.1 SQLite database records, Serper search, evidence-based AI research, CSV export, and OAuth registration migration.
+
+V1.2 original features:
+- OpenAI Sign in with ChatGPT OAuth + PKCE dynamic registration.
+- OIDC ID Token validation and local protected token storage.
+- Account-specific model catalog and Responses API streaming with store=false.

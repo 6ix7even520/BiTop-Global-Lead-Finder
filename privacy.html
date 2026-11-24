@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BiTop Global Lead Finder · 隐私与数据处理说明</title>
+<style>
+body{font-family:system-ui,"Microsoft YaHei",sans-serif;max-width:900px;margin:40px auto;padding:0 22px;color:#18313b;line-height:1.75;background:#f5f8f9}main{background:#fff;border:1px solid #dce5e9;border-radius:12px;padding:28px}h1{font-size:24px}h2{font-size:17px;margin-top:26px;color:#174c59}p,li{font-size:14px}a{color:#087d76}.note{padding:12px 15px;background:#eef6f6;border-left:3px solid #087d76}
+</style>
+</head>
+<body><main>
+<h1>BiTop Global Lead Finder 隐私与数据处理说明</h1>
+<p>本说明适用于本地运行的 BiTop Global Lead Finder。请在使用 Serper 搜索或 ChatGPT AI 背调前阅读，并在主界面勾选数据处理确认。该程序是 BiTop 使用的独立工具，不代表 OpenAI 或 Serper 的官方产品。</p>
+<h2>1. 本地运行与数据存储</h2>
+<ul>
+<li>应用在你的电脑上运行，默认地址为 <code>http://127.0.0.1:8765</code>。应用没有自建云端数据库，也不会自动把本地客户库上传到 GitHub。</li>
+<li>客户线索、AI 背调报告和跟进信息保存在本机 <code>leads.sqlite3</code>。</li>
+<li>ChatGPT OAuth access token、refresh token 和 ID token 保存在本机 <code>chatgpt_auth.bin</code>；Windows 使用 DPAPI 加密，并绑定当前 Windows 用户和设备。</li>
+<li>公开仓库 URL 设置保存在本机 <code>app_settings.json</code>。Serper API Key 只在当前浏览器页面内存中使用，不写入客户数据库或公开源代码。</li>
+</ul>
+<h2>2. 哪些数据会发送给第三方服务</h2>
+<ul>
+<li><b>Serper 搜索：</b>当你勾选数据处理确认并点击自动搜索或 AI 背调时，搜索词、国家和语言参数会发送给 Serper，以返回公开网页搜索结果。Serper API Key 会随请求用于服务身份验证。</li>
+<li><b>OpenAI Responses API：</b>当你主动启动 AI 背调时，候选企业/店铺名称、国家、目标产品、来源 URL、搜索摘要、读取到的公开网页摘录，以及从公开网页提取的商务联系方式会发送给 OpenAI 进行分析。请求使用你授权的 ChatGPT 计划用量，并设置 <code>store=false</code>、<code>stream=true</code>。</li>
+<li><b>Google：</b>如果你主动点击界面中的 Google 搜索链接，浏览器会将该搜索词发送给 Google。</li>
+<li><b>OpenAI 登录：</b>点击 Continue with ChatGPT 后，浏览器会跳转至 OpenAI 授权页面。OAuth 授权信息会发送给 OpenAI 身份认证服务；应用不会要求或读取你的 ChatGPT 密码、浏览器 Cookie 或 ChatGPT 对话记录。</li>
+</ul>
+<div class="note">本应用使用 ChatGPT 计划用量不代表应用能读取你的 ChatGPT 对话、历史记录或其他账户上下文。外部服务如何处理收到的数据，以各服务当时适用的条款和隐私政策为准；本地应用无法控制第三方服务的留存和处理。</div>
+<h2>3. 用户控制与请求触发</h2>
+<ul>
+<li>Serper 搜索和 AI 背调均由本机用户主动点击触发。批量 AI 背调会在执行前再次显示请求数量和费用/用量提示。</li>
+<li>应用不会在后台定时发起 ChatGPT 请求，不会把一个用户的订阅用于处理其他用户的请求，也不提供通用 API 代理。</li>
+<li>应用不提供多个 ChatGPT 账户轮换、拆分或规避使用额度的功能。</li>
+<li>你可以在应用中断开 ChatGPT；应用会尝试撤销 refresh token 并清除本地令牌。你也可以在 ChatGPT 的 Usage 设置中管理授权。</li>
+</ul>
+<h2>4. 数据最小化与使用限制</h2>
+<ul>
+<li>本工具用于研究公开商业信息。请只提交开展企业背调所必需的公开业务资料。</li>
+<li>不要提交非公开个人资料、敏感个人信息、密码、支付资料、客户私密合同或其他不必要的机密信息。</li>
+<li>企业名称、邮箱、电话、进口能力和经营范围等 AI 识别结果可能不完整或错误。所有客户等级和商务联系方式都必须人工核实，不应将 AI 结果作为企业注册或进口资质的官方证明。</li>
+</ul>
+<h2>5. 本地数据保留与删除</h2>
+<ul>
+<li>客户数据会保留在本机数据库，直到用户自行删除记录或删除数据库文件。请定期备份需要保留的客户资料。</li>
+<li>OAuth 凭据保存在本机。断开账户会尝试撤销远程 refresh token，并清除本地访问凭据；如果远程撤销未确认，请到 ChatGPT Usage 设置检查授权状态。</li>
+<li>公开 GitHub 仓库只用于发布程序源代码。禁止上传 <code>leads.sqlite3</code>、<code>chatgpt_auth.bin</code>、<code>.chatgpt_auth.key</code>、<code>app_settings.json</code>、API Key、令牌或客户资料。</li>
+</ul>
+<h2>6. 第三方说明</h2>
+<ul>
+<li><a href="https://openai.com/policies/privacy-policy/" target="_blank" rel="noopener">OpenAI 隐私政策</a></li>
+<li><a href="https://openai.com/policies/sign-in-with-chatgpt-terms/" target="_blank" rel="noopener">Sign in with ChatGPT 条款</a></li>
+<li><a href="https://developers.openai.com/siwc/token-sharing-open-source" target="_blank" rel="noopener">Sign in with ChatGPT 开发文档</a></li>
+<li>Serper 服务的数据处理方式请查阅 Serper 官方当时适用的服务条款和隐私政策。</li>
+</ul>
+<p>如对本地部署、客户数据处理或公司内部使用有疑问，请联系 BiTop 内部系统负责人。使用本工具前，请确认你的操作符合公司制度及适用的数据保护法律。</p>
+<p><a href="/">返回 BiTop Global Lead Finder</a></p>
+</main></body></html>

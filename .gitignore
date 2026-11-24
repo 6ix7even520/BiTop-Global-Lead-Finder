@@ -1,0 +1,28 @@
+# Local customer database and backups
+leads.sqlite3
+leads.sqlite3-*
+*.sqlite3
+*.db
+*.sqlite
+*-wal
+*-shm
+*-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.sqlite3-journal
+
+# Local ChatGPT SIWC credentials and host identity
+chatgpt_auth.bin
+chatgpt_auth.tmp
+.chatgpt_auth.key
+chatgpt_host_id.txt
+
+# Local settings / secrets
+app_settings.json
+.env
+*.log
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
